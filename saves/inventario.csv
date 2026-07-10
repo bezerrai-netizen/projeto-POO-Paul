@@ -1,2 +1,2 @@
-nome,preco
-Batata,10
+tipo,nome,preco
+Comida,Batata,10

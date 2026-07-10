@@ -5,8 +5,8 @@ class Loja:
     def __init__(self):
         self.__estoque = [Comida("Batata", 10, 20), Brinquedo("Bola", 30, 25), Pocao("Poção de Vida", 50, "saude", 30)]
 
-    @property
-    def estoque(self):
+
+    def get_estoque(self):
         return self.__estoque
 
 

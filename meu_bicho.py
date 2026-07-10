@@ -93,18 +93,18 @@ class Bicho(DormirMixin, LogMixin, SalvarMixin, CarregarMixin):
     def __str__(self):
 
         return self.nome
-    def carregar_inventario(inventario, arquivo):
+    def carregar_inventario(self, arquivo):
         with open(arquivo, "r", newline="", encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
 
             for linha in reader:
-                
+                tipo = linha["tipo"]
                 nome = linha["nome"]
                 preco = int(linha["preco"])
 
-                
-                inventario.adicionar(Comida(nome, preco))
-                
-                inventario.adicionar(Brinquedo(nome, preco))
-                
-                inventario.adicionar(Pocao(nome, preco))
+                if tipo == "Comida":
+                    self.inventario.adicionar(Comida(nome, preco, 0))
+                elif tipo == "Brinquedo":
+                    self.inventario.adicionar(Brinquedo(nome, preco, 0))
+                elif tipo == "Pocao":
+                    self.inventario.adicionar(Pocao(nome, preco, "", 0))

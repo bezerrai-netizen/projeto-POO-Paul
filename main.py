@@ -2,7 +2,7 @@ import csv
 from meu_bicho import Bicho
 from loja import Loja
 import os
-
+from minijogos import Jogo_da_cobrinha
 
 SAVE = "saves/save.csv"
 SAVE_INVENTARIO = "saves/inventario.csv"
@@ -14,8 +14,6 @@ else:
 
 loja = Loja()
 
-
-
 while True:
 
     print("\n===== MENU =====")
@@ -25,6 +23,7 @@ while True:
     print("4 - Brincar")
     print("5 - Banho")
     print("6 - Dormir")
+    print("7 - jogar minijogo")
     print("0 - Sair")
 
     opcao = input("Escolha: ")
@@ -58,6 +57,13 @@ while True:
 
     elif opcao == "6":
         pet.dormir()
+    
+    elif opcao == "7":
+        Jogo_da_cobrinha.rodar
+        if Jogo_da_cobrinha.rodar:
+            pet.carteira += 30
+            pet.status.sono += 20
+        
 
     elif opcao == "0":
         pet.salvar(SAVE)

@@ -52,11 +52,11 @@ class Inventario:
         with open(arquivo, "w", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
 
-            writer.writerow(["nome", "preco"])
+            writer.writerow(["tipo", "nome", "preco"])
 
             for item in self.__itens:
                 writer.writerow([
-                    
+                    item.__class__.__name__,
                     item.nome,
                     item.preco
                 ])

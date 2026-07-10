@@ -11,9 +11,7 @@ class Carteira:
     def saldo(self, valor):
         self.__saldo = max(0, valor)
 
-    def adicionar(self, valor):
-        self.__saldo += valor
-
+    
     def retirar(self, valor):
 
         if valor <= self.__saldo:
@@ -23,6 +21,10 @@ class Carteira:
         return False
 
     def __int__(self):
+        return self.__saldo
+    
+    def __iadd__(self, other):
+        self.__saldo += other
         return self.__saldo
 
     def __str__(self):
