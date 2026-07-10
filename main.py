@@ -66,7 +66,7 @@ while True:
         
 
     elif opcao == "0":
-        pet.salvar(SAVE)
+        pet.salvar(Bicho, SAVE)
         pet.inventario.salvar_inventario(SAVE_INVENTARIO)
         break
 
