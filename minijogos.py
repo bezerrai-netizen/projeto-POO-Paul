@@ -4,14 +4,21 @@ class Migame(ABC):
     def rodar(self) -> bool:
         pass
     
-    def ganha(self, bicho):
-        if self.rodar:
-            bicho.carteira += 30
-            bicho.status.sono += 20
 
 class Jogo_da_cobrinha(Migame):
     def rodar(self):
         return True
+    
+class Jogo_de_desviar(Migame):
+    def rodar(self):
+        return True
+
+class Spaceinvaders(Migame):
+    def rodar(self):
+        return True
+    
+
+
         
 
 
