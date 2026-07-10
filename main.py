@@ -41,7 +41,8 @@ while True:
 
     elif opcao == "3":
 
-        pet.inventario.listar()
+        for item in pet.inventario:
+            print(f"{item.nome} - {item.preco} moedas")
 
         usar = input("Usar algum item? (s/n): ")
 

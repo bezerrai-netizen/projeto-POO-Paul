@@ -43,5 +43,7 @@ class Inventario:
         self.__itens.remove(item)
 
         return True
-
+    
+    def __iter__(self):
+        return iter(self.itens)
 

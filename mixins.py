@@ -57,5 +57,5 @@ class CarregarMixin:
         pet.status.sujeira = int(dados[7])
         pet.carteira.saldo = int(dados[8])
         pet.status.vivo = int(dados[9]) == 1
-         
+        pet.inventario = [item.strip() for item in dados[10].split(",") if item.strip()]
         return pet

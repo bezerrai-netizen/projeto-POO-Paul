@@ -84,6 +84,7 @@ class Bicho(DormirMixin, LogMixin, SalvarMixin, CarregarMixin):
             self.carteira.saldo,
             1 if self.status.vivo else 0,
             
+            
 
             "|".join(item.nome for item in self.inventario)
         ]
