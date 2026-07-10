@@ -10,9 +10,6 @@ class Inventario:
     def adicionar(self, item):
         self.__itens.append(item)
 
-    def remover(self, item):
-        if item in self.__itens:
-            self.__itens.remove(item)
 
     def listar(self):
 
@@ -43,24 +40,8 @@ class Inventario:
             return False
 
         item.usar(bicho)
-        self.remover(item)
+        self.__itens.remove(item)
 
         return True
 
-    def __len__(self):
-        return len(self.__itens)
 
-    def __contains__(self, nome):
-
-        return any(item.nome.lower() == nome.lower()
-                   for item in self.__itens)
-
-    def __iter__(self):
-        return iter(self.__itens)
-
-    def __str__(self):
-
-        if not self.__itens:
-            return "Inventário vazio."
-
-        return ", ".join(item.nome for item in self.__itens)

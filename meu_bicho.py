@@ -1,4 +1,4 @@
-from mixins import DormirMixin, LogMixin, SalvarMixin
+from mixins import DormirMixin, LogMixin, SalvarMixin, CarregarMixin
 from status import Status
 from carteira import Carteira
 from inventario import Inventario
@@ -6,7 +6,7 @@ import csv
 from abc import ABC
 import os
 
-class Bicho(DormirMixin, LogMixin, SalvarMixin):
+class Bicho(DormirMixin, LogMixin, SalvarMixin, CarregarMixin):
 
     def __init__(self, nome):
 
@@ -83,6 +83,7 @@ class Bicho(DormirMixin, LogMixin, SalvarMixin):
             self.status.sujeira,
             self.carteira.saldo,
             1 if self.status.vivo else 0,
+            
 
             "|".join(item.nome for item in self.inventario)
         ]
@@ -91,28 +92,3 @@ class Bicho(DormirMixin, LogMixin, SalvarMixin):
 
         return self.nome
 
-class CarregarMixin(ABC):
-  
-    @classmethod
-    def carregar(cls, arquivo):
-
-        with open(arquivo, "r", newline="", encoding="utf-8") as csvfile:
-
-            reader = csv.reader(csvfile)
-
-            dados = next(reader)
-
-        pet = cls(dados[0])
-
-        pet.idade = float(dados[1])
-
-        pet.status.saude = int(dados[2])
-        pet.status.fome = int(dados[3])
-        pet.status.sono = int(dados[4])
-        pet.status.energia = int(dados[5])
-        pet.status.felicidade = int(dados[6])
-        pet.status.sujeira = int(dados[7])
-        pet.carteira.saldo = int(dados[8])
-        pet.status.vivo = int(dados[9]) == 1
-         
-        return pet

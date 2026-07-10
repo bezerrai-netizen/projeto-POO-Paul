@@ -1,24 +1,18 @@
+import csv
 from meu_bicho import Bicho
 from loja import Loja
-from itens.comida import Comida
-from itens.brinquedo import Brinquedo
-from itens.porcao import Pocao
 import os
-import csv
-from abc import ABC
+
 
 SAVE = "saves/save.csv"
 
 if os.path.exists(SAVE):
-    pet = Bicho.carregar(SAVE)
+    pet = Bicho.carregar(Bicho, SAVE)
 else:
-    nome = input("Digite o nome do seu pet: ")
-    pet = Bicho(nome)
+    pet = Bicho("Paul")
 
 loja = Loja()
-loja.adicionar_item(Comida("Batata", 10, 20))
-loja.adicionar_item(Brinquedo("Bola", 30, 25))
-loja.adicionar_item(Pocao("Poção de Vida", 50, "saude", 30))
+
 
 
 while True:
@@ -71,7 +65,6 @@ while True:
     else:
         print("Opção inválida.")
 
-import csv
-from abc import ABC
 
+import csv
 

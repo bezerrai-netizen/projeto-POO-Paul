@@ -1,18 +1,15 @@
+from itens.comida import Comida
+from itens.brinquedo import Brinquedo
+from itens.porcao import Pocao 
 class Loja:
 
     def __init__(self):
-        self.__estoque = []
+        self.__estoque = [Comida("Batata", 10, 20), Brinquedo("Bola", 30, 25), Pocao("Poção de Vida", 50, "saude", 30)]
 
     @property
     def estoque(self):
         return self.__estoque
 
-    def adicionar_item(self, item):
-        self.__estoque.append(item)
-
-    def remover_item(self, item):
-        if item in self.__estoque:
-            self.__estoque.remove(item)
 
     def procurar(self, nome):
 
@@ -48,7 +45,7 @@ class Loja:
 
         comprador.inventario.adicionar(item)
 
-        self.remover_item(item)
+
 
         print(f"{comprador.nome} comprou {item.nome}.")
 
