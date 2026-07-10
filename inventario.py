@@ -1,3 +1,4 @@
+import csv
 class Inventario:
 
     def __init__(self):
@@ -46,4 +47,18 @@ class Inventario:
     
     def __iter__(self):
         return iter(self.itens)
+    
+    def salvar_inventario(self, arquivo):
+        with open(arquivo, "w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
 
+            writer.writerow(["nome", "preco"])
+
+            for item in self.__itens:
+                writer.writerow([
+                    
+                    item.nome,
+                    item.preco
+                ])
+
+    

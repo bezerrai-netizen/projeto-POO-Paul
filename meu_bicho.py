@@ -2,6 +2,7 @@ from mixins import DormirMixin, LogMixin, SalvarMixin, CarregarMixin
 from status import Status
 from carteira import Carteira
 from inventario import Inventario
+from item import Comida, Brinquedo, Pocao
 import csv
 from abc import ABC
 import os
@@ -92,4 +93,18 @@ class Bicho(DormirMixin, LogMixin, SalvarMixin, CarregarMixin):
     def __str__(self):
 
         return self.nome
+    def carregar_inventario(inventario, arquivo):
+        with open(arquivo, "r", newline="", encoding="utf-8") as csvfile:
+            reader = csv.DictReader(csvfile)
 
+            for linha in reader:
+                
+                nome = linha["nome"]
+                preco = int(linha["preco"])
+
+                
+                inventario.adicionar(Comida(nome, preco))
+                
+                inventario.adicionar(Brinquedo(nome, preco))
+                
+                inventario.adicionar(Pocao(nome, preco))

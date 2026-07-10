@@ -5,9 +5,10 @@ import os
 
 
 SAVE = "saves/save.csv"
-
+SAVE_INVENTARIO = "saves/inventario.csv"
 if os.path.exists(SAVE):
     pet = Bicho.carregar(Bicho, SAVE)
+    pet.carregar_inventario(SAVE_INVENTARIO)
 else:
     pet = Bicho("Paul")
 
@@ -41,8 +42,7 @@ while True:
 
     elif opcao == "3":
 
-        for item in pet.inventario:
-            print(f"{item.nome} - {item.preco} moedas")
+        pet.inventario.listar()
 
         usar = input("Usar algum item? (s/n): ")
 
@@ -61,6 +61,7 @@ while True:
 
     elif opcao == "0":
         pet.salvar(SAVE)
+        pet.inventario.salvar_inventario(SAVE_INVENTARIO)
         break
 
     else:

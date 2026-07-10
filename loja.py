@@ -1,6 +1,5 @@
-from itens.comida import Comida
-from itens.brinquedo import Brinquedo
-from itens.porcao import Pocao 
+from item import Comida, Brinquedo, Pocao
+
 class Loja:
 
     def __init__(self):
