@@ -4,6 +4,7 @@ from loja import Loja
 import os
 from minijogos import Jogo_da_cobrinha
 
+
 SAVE = "saves/save.csv"
 SAVE_INVENTARIO = "saves/inventario.csv"
 if os.path.exists(SAVE):
@@ -15,6 +16,8 @@ else:
 loja = Loja()
 
 while True:
+
+    pet.atualizar_status()
 
     print("\n===== MENU =====")
     print("1 - Status")

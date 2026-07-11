@@ -6,17 +6,28 @@ from item import Comida, Brinquedo, Pocao
 import csv
 from abc import ABC
 import os
-
+import time
 class Bicho(DormirMixin, LogMixin, SalvarMixin, CarregarMixin):
 
     def __init__(self, nome):
 
         self.nome = nome
         self.idade = 0
-
+        self.ultima_att_status = time.time()
         self.status = Status()
         self.carteira = Carteira()
         self.inventario = Inventario()
+
+    def atualizar_status(self):
+        agora = time.time()
+
+        if (agora - self.ultima_att_status) >= 5:
+            self.status.fome += 2
+            self.status.sono += 1
+            self.status.sujeira += 1
+            self.status.felicidade -= 2
+
+            self.ultima_att_status = agora
 
     def comer(self, nome_comida):
 
