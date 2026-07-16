@@ -22,6 +22,7 @@ class Bicho(DormirMixin, LogMixin, SalvarMixin, CarregarMixin):
         agora = time.time()
 
         if (agora - self.ultima_att_status) >= 5:
+            self.idade += 0.05
             self.status.fome += 2
             self.status.sono += 1
             self.status.sujeira += 1
@@ -119,3 +120,92 @@ class Bicho(DormirMixin, LogMixin, SalvarMixin, CarregarMixin):
                     self.inventario.adicionar(Brinquedo(nome, preco, 0))
                 elif tipo == "Pocao":
                     self.inventario.adicionar(Pocao(nome, preco, "", 0))
+
+    def ganhar_dinheiro(self, valor):
+        self.carteira.saldo += valor
+    
+    def animar(self, stdscr):
+        import curses
+        import time
+
+        curses.curs_set(0)
+        stdscr.nodelay(True)
+
+        altura, largura = stdscr.getmaxyx()
+        inicio = time.time()
+
+        normal = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  o o  | ",
+            " |   ^   | ",
+            " | \\___/ | ",
+            "  \\_____/  "
+        ]
+
+        feliz = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  ^ ^  | ",
+            " |  \\_/  | ",
+            " | \\___/ | ",
+            "  \\_____/  "
+        ]
+
+        fome = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  o o  | ",
+            " |   .   | ",
+            " |  ___  | ",
+            "  \\_____/  "
+        ]
+
+        fome2 = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  - -  | ",
+            " |   .   | ",
+            " |  ___  | ",
+            "  \\_____/  "
+        ]
+
+        quadro = 0
+
+        while time.time() - inicio < 5:
+            if self.status.fome >= 80:
+                animacao = [fome, fome2]
+            elif self.status.felicidade >= 80:
+                animacao = [feliz]
+            else:
+                animacao = [normal]
+
+            desenho = animacao[quadro % len(animacao)]
+            stdscr.clear()
+
+            y = altura // 2
+            x = largura // 2 - 5
+
+            for linha in desenho:
+                stdscr.addstr(y, x, linha)
+                y += 1
+
+            stdscr.addstr(
+                1,
+                2,
+                f"Fome: {self.status.fome}  Felicidade: {self.status.felicidade}"
+            )
+            stdscr.addstr(3, 2, "Pressione q para sair.")
+            stdscr.refresh()
+
+            quadro += 1
+            time.sleep(0.5)
+
+            tecla = stdscr.getch()
+            if tecla == ord("q"):
+                break
+
+
+
+
+

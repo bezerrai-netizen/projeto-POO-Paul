@@ -60,5 +60,94 @@ class Inventario:
                     item.nome,
                     item.preco
                 ])
-
     
+    def animar(self, stdscr):
+        import curses
+        import time
+
+        curses.curs_set(0)
+
+        altura, largura = stdscr.getmaxyx()
+
+        normal = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  o o  | ",
+            " |   ^   | ",
+            " | \\___/ | ",
+            "  \\_____/  "
+        ]
+
+        feliz = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  ^ ^  | ",
+            " |  \\_/  | ",
+            " | \\___/ | ",
+            "  \\_____/  "
+        ]
+
+        fome = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  o o  | ",
+            " |   .   | ",
+            " |  ___  | ",
+            "  \\_____/  "
+        ]
+
+        fome2 = [
+            "   _____   ",
+            "  /     \\  ",
+            " |  - -  | ",
+            " |   .   | ",
+            " |  ___  | ",
+            "  \\_____/  "
+        ]
+
+        quadro = 0
+
+        while True:
+
+            # Escolhe animação pelo estado
+            if self.status.fome >= 80:
+                animacao = [fome, fome2]
+
+            elif self.status.felicidade >= 80:
+                animacao = [feliz]
+
+            else:
+                animacao = [normal]
+
+
+            desenho = animacao[quadro % len(animacao)]
+
+            stdscr.clear()
+
+            y = altura // 2
+            x = largura // 2 - 5
+
+            for linha in desenho:
+                stdscr.addstr(y, x, linha)
+                y += 1
+
+
+            # Mostra status
+            stdscr.addstr(
+                1,
+                2,
+                f"Fome: {self.status.fome}  Felicidade: {self.status.felicidade}"
+            )
+
+            stdscr.refresh()
+
+            quadro += 1
+
+            time.sleep(0.5)
+
+            tecla = stdscr.getch()
+
+            if tecla == ord("q"):
+                break
+
+        

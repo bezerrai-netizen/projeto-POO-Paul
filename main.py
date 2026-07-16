@@ -2,9 +2,9 @@ import csv
 from meu_bicho import Bicho
 from loja import Loja
 import os
-from minijogos import Jogo_da_cobrinha
-
-
+from minijogos import Jogo_da_cobrinha, Spaceinvaders, Jogo_de_desviar
+import time
+import curses
 SAVE = "saves/save.csv"
 SAVE_INVENTARIO = "saves/inventario.csv"
 if os.path.exists(SAVE):
@@ -18,7 +18,8 @@ loja = Loja()
 while True:
 
     pet.atualizar_status()
-
+    pet.verificar_estado()
+    
     print("\n===== MENU =====")
     print("1 - Status")
     print("2 - Loja")
@@ -27,7 +28,9 @@ while True:
     print("5 - Banho")
     print("6 - Dormir")
     print("7 - jogar minijogo")
+    print("8 - Ver Paul")
     print("0 - Sair")
+    
 
     opcao = input("Escolha: ")
 
@@ -62,14 +65,51 @@ while True:
         pet.dormir()
     
     elif opcao == "7":
-        Jogo_da_cobrinha.rodar
-        if Jogo_da_cobrinha.rodar:
-            pet.carteira += 30
-            pet.status.sono += 20
+        print("\n=== ESCOLHA UM JOGO ===")
+        print("1 - Jogo da Cobrinha")
+        print("2 - Space Invaders")
+        print("3 - Jogo de desviar")
+
+        opcao = input("Escolha: ")
+
+        if opcao == "1":
+            jogocobra = Jogo_da_cobrinha()
+
+            if jogocobra.iniciar():
+                pet.ganhar_dinheiro(30)
+                pet.status.sono += 20
+                pet.status.felicidade += 30
+                print("Você ganhou 30 moedas!")
+
+        elif opcao == "2":
+            jogo_space = Spaceinvaders()
+
+            if jogo_space.iniciar():
+                pet.ganhar_dinheiro(100)
+                pet.status.sono += 20
+                pet.status.felicidade += 30
+                print("Você ganhou 100 moedas!")
         
+        elif opcao == "3":
+            jogo_desvio = Jogo_de_desviar()
+
+            if jogo_desvio.iniciar():
+                pet.ganhar_dinheiro(100)
+                pet.status.sono += 20
+                pet.status.felicidade += 30
+                print("Você ganhou 100 moedas!")
+
+        else:
+            print("Jogo inválido!")
+                
+    elif opcao == "8":
+
+        
+        curses.wrapper(pet.animar)
+            
 
     elif opcao == "0":
-        pet.salvar(Bicho, SAVE)
+        pet.salvar(SAVE)
         pet.inventario.salvar_inventario(SAVE_INVENTARIO)
         break
 

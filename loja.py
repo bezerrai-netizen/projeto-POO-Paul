@@ -3,7 +3,7 @@ from item import Comida, Brinquedo, Pocao
 class Loja:
 
     def __init__(self):
-        self.__estoque = [Comida("Batata", 10, 20), Brinquedo("Bola", 30, 25), Pocao("Poção de Vida", 50, "saude", 30)]
+        self.__estoque = [Comida("Batata", 10, 20), Brinquedo("Bola", 30, 25), Pocao("Poção de Vida", 50, "saude", 30), Comida("salsicha", 20, 30), Brinquedo("Pau de borracha", 10000, 100)]
 
 
     def get_estoque(self):
